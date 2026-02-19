@@ -1,10 +1,8 @@
----
-
 # Gemini Chat Deleter
 
 A lightweight JavaScript automation script designed to clean up your Google Gemini conversation history. Since Gemini currently lacks a "Delete All" button in the interface, this script automates the manual clicking process for you.
 
-##  Warning
+## ⚠️ Warning
 
 **This script will permanently delete your chats.** There is no "Undo" once a chat is removed. Use this at your own risk. It is recommended to run this while you are actively watching the tab to ensure it is performing as expected.
 
@@ -40,12 +38,12 @@ Right-click anywhere on the page and select **Inspect**, or use the keyboard sho
 Click on the **Console** tab at the top of the Developer Tools window. Copy the code below, paste it into the console, and hit **Enter**:
 
 ```javascript
-// Copy the code from your script here
 async function deleteAllGeminiChats() {
     const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
     let deleted = 0;
 
     while (true) {
+        // Select first chat
         const chats = document.querySelectorAll('a[data-test-id="conversation"]');
         if (!chats.length) {
             console.log("No more chats found.");
@@ -56,6 +54,7 @@ async function deleteAllGeminiChats() {
         chat.click();
         await delay(1500);
 
+        // Click 3-dot menu (More actions)
         const moreBtn = document.querySelector('button[data-test-id="actions-menu-button"]');
         if (!moreBtn) {
             console.log("More button not found.");
@@ -65,6 +64,7 @@ async function deleteAllGeminiChats() {
         moreBtn.click();
         await delay(800);
 
+        // Click Delete option
         const deleteOption = Array.from(document.querySelectorAll('span'))
             .find(el => el.textContent.trim() === "Delete");
 
@@ -76,6 +76,7 @@ async function deleteAllGeminiChats() {
         deleteOption.click();
         await delay(800);
 
+        // Confirm delete
         const confirmBtn = Array.from(document.querySelectorAll('button'))
             .find(el => el.textContent.trim() === "Delete");
 
@@ -90,6 +91,7 @@ async function deleteAllGeminiChats() {
 
         await delay(2000);
     }
+
     console.log("Finished deleting all chats.");
 }
 
@@ -111,5 +113,3 @@ Keep the tab open and active. You will see the script progress through your chat
 ## License
 
 MIT
-
----
