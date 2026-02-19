@@ -4,7 +4,7 @@
 
 A lightweight JavaScript automation script designed to clean up your Google Gemini conversation history. Since Gemini currently lacks a "Delete All" button in the interface, this script automates the manual clicking process for you.
 
-## ⚠️ Warning
+##  Warning
 
 **This script will permanently delete your chats.** There is no "Undo" once a chat is removed. Use this at your own risk. It is recommended to run this while you are actively watching the tab to ensure it is performing as expected.
 
